@@ -4,6 +4,7 @@ var request = require("request"),
     async = require("async"),
     factory = require("./factory"),
     cleanup = require("./cleanup"),
+	colors = require("colors"),
     requestStatTotal = 0,
     requestStat = {},
     updateStat,
@@ -199,6 +200,11 @@ makeRequest = function (cfg, callback, context, opts) {
             }
         }
     }
+    
+    console.log('******************************************');
+    console.log('URL: ' + requestCfg.url + ' (' + requestCfg.method + ')');
+    console.log('Response body: ' + requestCfg.body);
+    console.log('******************************************');
 
     request(
         requestCfg,
@@ -208,7 +214,7 @@ makeRequest = function (cfg, callback, context, opts) {
             if (! err) {
                 checkCleanUp(cfg, context);
             }
-
+            
             callback(err, res);
         }
     );
